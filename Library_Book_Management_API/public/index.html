@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14233d">
+  <title>Library Book Management API</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="eyebrow"><span class="eyebrow-mark"></span> BACKEND EXAM <span class="eyebrow-slash">/</span> LIBRARY API</div>
+      <div class="title-row">
+        <h1>Library Book Management API</h1>
+        <div class="connection" id="connection-status"><span class="connection-dot"></span><span>Checking API</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="page-kicker"><span>TASK 1</span><span class="kicker-divider">|</span><span>Live CRUD console</span></div>
+
+    <section class="notice" aria-label="API status">
+      <span class="notice-icon" aria-hidden="true">i</span>
+      <p><strong id="notice-title">Connecting to your library</strong><span id="notice-copy">Checking the API and loading saved books.</span></p>
+    </section>
+
+    <div class="main-grid">
+      <section class="panel create-panel" aria-labelledby="create-heading">
+        <div class="panel-heading">
+          <div>
+            <div class="section-label">01 / CREATE</div>
+            <h2 id="create-heading">Add a book</h2>
+          </div>
+          <span class="method-tag method-post">POST</span>
+        </div>
+        <form id="book-form">
+          <label for="title">Title <span class="required">*</span></label>
+          <input id="title" name="title" placeholder="The Alchemist" required maxlength="160">
+          <label for="author">Author <span class="required">*</span></label>
+          <input id="author" name="author" placeholder="Paulo Coelho" required maxlength="120">
+          <div class="form-row">
+            <div>
+              <label for="price">Price</label>
+              <div class="input-affix"><span>$</span><input id="price" name="price" type="number" min="1" step="0.01" placeholder="12.50"></div>
+            </div>
+            <div>
+              <label for="category">Category</label>
+              <input id="category" name="category" placeholder="Fiction" maxlength="80">
+            </div>
+          </div>
+          <label class="availability" for="isAvailable"><input id="isAvailable" name="isAvailable" type="checkbox" checked><span class="checkmark"></span> Available to borrow</label>
+          <button class="primary-button" type="submit"><span aria-hidden="true">+</span> Create book <span class="button-route">POST /books</span></button>
+        </form>
+      </section>
+
+      <section class="panel catalog-panel" aria-labelledby="catalog-heading">
+        <div class="panel-heading catalog-heading">
+          <div>
+            <div class="section-label">02 / COLLECTION</div>
+            <h2 id="catalog-heading">Your books <span class="count-badge" id="book-count">0</span></h2>
+          </div>
+          <button id="refresh-button" class="icon-button" type="button" title="Refresh book list" aria-label="Refresh book list"><span aria-hidden="true">↻</span></button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>BOOK</th><th>CATEGORY</th><th>PRICE</th><th>STATUS</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+            <tbody id="book-list"><tr><td class="empty-state" colspan="5"><span class="empty-icon" aria-hidden="true">▤</span><strong>Loading your collection</strong><span>Books will appear here.</span></td></tr></tbody>
+          </table>
+        </div>
+        <div class="catalog-foot"><span class="foot-dot"></span> Synced with MongoDB <span class="foot-separator">·</span> <code>GET /books</code></div>
+      </section>
+    </div>
+
+    <section class="responses" aria-labelledby="responses-heading">
+      <div class="responses-title">
+        <div><div class="section-label">03 / REQUEST LOG</div><h2 id="responses-heading">API responses</h2></div>
+        <button id="invalid-id-button" class="text-button" type="button">Test invalid ID <span aria-hidden="true">↗</span></button>
+      </div>
+      <article class="response-card" id="create-response-card">
+        <div class="response-heading"><div class="route-label"><span class="method-tag method-post">POST</span><code>/books</code><span class="response-description">Create a book</span></div><span class="status-pill status-idle" id="create-status">Waiting</span></div>
+        <pre id="create-response">Submit the form above to see the response payload.</pre>
+      </article>
+      <article class="response-card">
+        <div class="response-heading"><div class="route-label"><span class="method-tag method-get">GET</span><code>/books</code><span class="response-description">List all books</span></div><span class="status-pill status-ok">200</span></div>
+        <pre id="list-response">Loading response...</pre>
+      </article>
+      <article class="response-card">
+        <div class="response-heading"><div class="route-label"><span class="method-tag method-get">GET</span><code>/books/invalid-id</code><span class="response-description">Invalid ID check</span></div><span class="status-pill status-idle" id="invalid-status">Ready</span></div>
+        <pre id="invalid-response">Select “Test invalid ID” to view the 400 response.</pre>
+      </article>
+    </section>
+    <footer><span>LIBRARY API</span><span>Node.js · Express · MongoDB</span><a href="/health">Health check <span aria-hidden="true">↗</span></a></footer>
+  </main>
+</body>
+</html>

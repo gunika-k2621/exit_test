@@ -1,0 +1,11 @@
+{
+  "info": { "name": "Library Book API", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:3000" }, { "key": "bookId", "value": "REPLACE_WITH_BOOK_ID" }],
+  "item": [
+    { "name": "Create book", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"The Alchemist\",\n  \"author\": \"Paulo Coelho\",\n  \"price\": 12.5,\n  \"category\": \"Fiction\"\n}" }, "url": "{{baseUrl}}/books" } },
+    { "name": "List books", "request": { "method": "GET", "url": "{{baseUrl}}/books" } },
+    { "name": "Get book", "request": { "method": "GET", "url": "{{baseUrl}}/books/{{bookId}}" } },
+    { "name": "Update book", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"price\": 14,\n  \"isAvailable\": false\n}" }, "url": "{{baseUrl}}/books/{{bookId}}" } },
+    { "name": "Delete book", "request": { "method": "DELETE", "url": "{{baseUrl}}/books/{{bookId}}" } }
+  ]
+}

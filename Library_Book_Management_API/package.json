@@ -1,0 +1,15 @@
+{
+  "name": "library-book-management-api",
+  "version": "1.0.0",
+  "description": "Library book management API and browser interface",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "info": { "name": "Student Portal API", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:3000" }, { "key": "studentToken", "value": "REPLACE_WITH_STUDENT_TOKEN" }, { "key": "adminToken", "value": "REPLACE_WITH_ADMIN_TOKEN" }],
+  "item": [
+    { "name": "Register student", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Asha Student\",\n  \"email\": \"asha@example.com\",\n  \"password\": \"student123\",\n  \"role\": \"student\"\n}" }, "url": "{{baseUrl}}/register" } },
+    { "name": "Register admin", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Portal Admin\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123\",\n  \"role\": \"admin\"\n}" }, "url": "{{baseUrl}}/register" } },
+    { "name": "Login student", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"email\": \"asha@example.com\",\n  \"password\": \"student123\"\n}" }, "url": "{{baseUrl}}/login" } },
+    { "name": "Login admin", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123\"\n}" }, "url": "{{baseUrl}}/login" } },
+    { "name": "Profile without token (expect 401)", "request": { "method": "GET", "url": "{{baseUrl}}/profile" } },
+    { "name": "Profile with student token", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{studentToken}}" }], "url": "{{baseUrl}}/profile" } },
+    { "name": "Students as student (expect 403)", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{studentToken}}" }], "url": "{{baseUrl}}/students" } },
+    { "name": "Students as admin", "request": { "method": "GET", "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }], "url": "{{baseUrl}}/students" } }
+  ]
+}
